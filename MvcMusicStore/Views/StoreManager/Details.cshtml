@@ -6,8 +6,9 @@
 
 <h2>Details</h2>
 
-<div>
-    <h4>Album</h4>
+<!--<div>-->
+<fieldset>
+    <legend>Album</legend>
     <hr />
     <dl class="dl-horizontal">
         <dt>
@@ -51,7 +52,8 @@
         </dd>
 
     </dl>
-</div>
+    <!--</div>-->
+</fieldset>
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.AlbumId }) |
     @Html.ActionLink("Back to List", "Index")
