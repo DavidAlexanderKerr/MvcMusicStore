@@ -34,7 +34,7 @@ namespace MvcMusicStore
                 var user = new ApplicationUser();
                 user.UserName = "lotophagos";
                 user.Email = "lotophagos@live.co.uk";
-                string userPWD = "password";
+                string userPWD = "Pa$$w0rd";
                 IdentityResult chkUser = userManager.Create(user, userPWD);
 
                 // 3 add user to Admin

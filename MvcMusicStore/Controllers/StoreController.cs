@@ -35,5 +35,12 @@ namespace MvcMusicStore.Controllers
 
             return View(album);
         }
+
+        [ChildActionOnly]
+        public ActionResult GenreMenu()
+        {
+            List<Genre> genres = storeDB.Genres.ToList();
+            return PartialView(genres);
+        }
     }
 }

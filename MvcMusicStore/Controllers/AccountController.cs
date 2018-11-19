@@ -79,6 +79,7 @@ namespace MvcMusicStore.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    MigrateShoppingCart(model.Username);
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -156,12 +157,14 @@ namespace MvcMusicStore.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    MigrateShoppingCart(model.Username);
 
                     return RedirectToAction("Index", "Home");
                 }
@@ -481,5 +484,12 @@ namespace MvcMusicStore.Controllers
             }
         }
         #endregion
+
+        private void MigrateShoppingCart(string username)
+        {
+            ShoppingCart cart = ShoppingCart.GetCart(this.HttpContext);
+            cart.MigrateCart(username);
+            Session[ShoppingCart.CartSessionKey] = username;
+        }
     }
 }

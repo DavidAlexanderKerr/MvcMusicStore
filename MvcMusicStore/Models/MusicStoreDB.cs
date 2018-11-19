@@ -26,5 +26,9 @@ namespace MvcMusicStore.Models
         public System.Data.Entity.DbSet<MvcMusicStore.Models.Genre> Genres { get; set; }
 
         public System.Data.Entity.DbSet<MvcMusicStore.Models.Order> Orders { get; set; }
+
+        public DbSet<Cart> Carts { get; set; }
+
+        public DbSet<OrderDetail> OrderDetails { get; set; }
     }
 }

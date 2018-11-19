@@ -10,7 +10,7 @@ using MvcMusicStore.Models;
 
 namespace MvcMusicStore.Controllers
 {
-    [Authorize]
+    [Authorize(Roles ="Admin")]
     public class StoreManagerController : Controller
     {
         private MusicStoreDB db = new MusicStoreDB();
