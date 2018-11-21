@@ -21,14 +21,12 @@ namespace MvcMusicStore.Controllers
         }
 
         [HttpPost]
-        public ActionResult AddressAndPayment(FormCollection values)
+        public ActionResult AddressAndPayment(Order order)
         {
-            var order = new Order();
-            TryValidateModel(order);
-
-            try
+            if (ModelState.IsValid)
             {
-                if (string.Equals(values["PromoCode"],PromoCode,StringComparison.OrdinalIgnoreCase)==false)
+                string promoCode = HttpContext.Request.Form["PromoCode"];
+                if (string.Equals(promoCode,PromoCode,StringComparison.OrdinalIgnoreCase)==false)
                 {
                     return View(order);
                 }
@@ -46,7 +44,7 @@ namespace MvcMusicStore.Controllers
                     return RedirectToAction("Complete", new { Id = order.OrderId });
                 }
             }
-            catch
+            else
             {
                 return View(order);
             }
